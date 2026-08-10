@@ -61,7 +61,10 @@ Shape file: *input_data/Wind_farms_Bothnian_Sea.shp* and *input_data/nemo_nordic
 
 ### Connectivity metrics ###
 Using the jupyter notebook *connectivity/connectivity_metrics.ipynb*\
+Main metrics: in and out degree centrality\
 
+**Input data**:\
+Graph saved as json file\
 
 ### Shortest paths ###
 
