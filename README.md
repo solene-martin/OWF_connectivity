@@ -1,3 +1,4 @@
+# Impact of OWFs on ecological connectivity in the Baltic Sea #
 ## Run a Simulation ##
 **Two options**: seeding from OWFs (*Simulation/simulation_bothnian_sea_OWF.py*) or seeding from coastal areas (*Simulation/simulation_bothnian_sea_coast.py*). \
 \
@@ -62,10 +63,40 @@ Shape file: *input_data/Wind_farms_Bothnian_Sea.shp* and *input_data/nemo_nordic
 ### Connectivity metrics ###
 Using the jupyter notebook *connectivity/connectivity_metrics.ipynb*\
 Main metrics: in and out degree centrality\
-
+\
+**Input data**:\
+Graph saved as json file
+### Shortest paths ###
+#### Occurrence in shortest paths ####
+Using the jupyter notebook *connectivity/shortest_path.ipynb*.\
+**Step 1**: Opening the json file to generate the graph, creating new weights $-ln(probability)$\
+**Step 2**: Applying the Dijkstra's algorithm on the graph to find shortest paths\
+**Step 3**: Counting the occurence of OWFs in shortest paths + Other tests\
+\
 **Input data**:\
 Graph saved as json file\
-
-### Shortest paths ###
-
+Shape file: *input_data/Wind_farms_Bothnian_Sea.shp* and *input_data/nemo_nordic_10-20m_polygons.shp*
+#### Combinations of OWFs ####
+Using the jupyter notebook *connectivity/OWFs_combinations.ipynb*\
+**Step 1**: Opening the json file to generate the graph, creating new weights $-ln(probability)$\
+**Step 2**: Creating a dictionnary with all possible combinations\
+**Step 3**: Loop over combinations using the Dijkstra's algorithm to find the combinations of OWFs that have the most impact ("best combinations") or the least impact ("worst combinations") on connectivity. Save them in a json file (without overwriting the results that were already computed !)\
+N.B. : I didn't test every size of combinations because the computational cost was too high\
+**Input data**:\
+Graph saved as json file\
+Shape file: *input_data/Wind_farms_Bothnian_Sea.shp* and *input_data/nemo_nordic_10-20m_polygons.shp*
 ## Sensibility studies ##
+### Time step and diffusivity ###
+Run a simulation using *Sensibility_study/sensibility_test_time_step.py* or *Sensibility_study/sensibility_test_diffusivity.py*\
+Using the jupyter notebook *Sensibility_study/sensibility_test_time_step_diffusivity.ipynb* to do the analysis and plot the results
+### Number of particles ###
+**Step 1**: Run simulations using *Sensibility_study/sensibility_test_num_particle.py*\
+**Step 2**: Calculate raster files\
+**Step 3**: Plot the evolution of the Wasserstein metric, using the jupyter notebook *Sensibility_study/sensibility_test_num_part.ipynb*
+## Standard deviation ##
+**Step 1**: Generate samples of trajectories and calculate connectivity for these sample, using *Post_process/sample_connectivity.py*\
+**Step 2**: Plot a standard deviation matrix using the jupyter notebook *connectivity/standard_deviation.ipynb*\
+\
+**Input data**:\
+Grid: *input_data/cmems_baltic_grid.nc*\
+Shape file: *input_data/Wind_farms_Bothnian_Sea.shp*
